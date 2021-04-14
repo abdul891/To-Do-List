@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <title>Todolist app</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courgette', cursive;
+        }
+        body{
+            background-color:#082e66;
+        }
+        .main{
+        
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .container
+        {    margin: 20px;
+              width: 370px;
+            background-color:#48426D;
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+        
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        } 
+        h1{
+            color:#F0C38E;
+            
+                      
+        }
+        input{
+            width:280px;
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            animation-name: move;
+            animation-duration: 2s;
+ 
+            color: #48426D;
+        }
+        @keyframes move{
+            from{
+                margin-left: 0%;
+                width: 10px;
+            }
+            to{
+                margin-left: 0%;
+                width: 280px;
+            }
+        }
+        .add{
+            position: absolute;
+            width: 50px;
+            cursor: pointer;
+            margin-left: -30px;
+            height: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px;
+            float: right;
+            border: none;
+            background:#F0C38E;
+             
+        }
+        .add:hover{
+            background-color:rgb(199, 192, 192);
+        }
+        ul{
+            list-style-type: none;
+            overflow: hidden;
+           
+        }
+        li{
+            
+            width:280px;
+            border-left: 7px solid #F0C38E;
+            padding: 10px;
+            font-weight:inherit;
+            color: #ffff;
+            border-radius: 10px;
+            margin-top: 15px;
+            animation-name: demo;
+            animation-duration: 1s;
+            
+            
+        }
+        li:nth-child(even)
+        {
+            background-color: #9BC4F1;
+        }
+        li:nth-child(odd)
+        {
+            background-color: #B69BF1;
+        }
+        li:hover{
+            transform: translateY(-5px);
+        }
+        .delete{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: none;
+            padding: 3px;
+            float: right;
+           cursor: pointer;
+        
+            background:#48426D;
+            color: white;
+            font-weight: bold;
+            margin-top: -4px;
+          
+        }
+        @keyframes demo
+        {
+            from{
+                margin-left: 100%;
+                width: 170px;
+                
+            }
+            to{
+                margin-left: 0%;
+                width: 280px;
+            }
+        }
+        
+        
+    </style>
+</head>
+<script src="https://use.fontawesome.com/f146dbb75d.js"></script>
+<body>
+    <div class="main">
+        <div class="container">
+            <h1>To Do App</h1>
+            <form action="#" id="addform">
+                <input type="text" placeholder="Add Todo" id="itemvalue" required><button class="add" ><i class="fa fa-file" aria-hidden="true"></i></button>
+            </form>
+            <ul id="items">
+                <li>say<button  class="delete"><i class="fa fa-trash" aria-hidden="true"></i></button></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var form =document.getElementById("addform");
+        var itemlist=document.getElementById("items");
+        form.addEventListener("submit",additem);
+        itemlist.addEventListener("click",removeitem)
+        //add item funcation
+        function additem(e)
+        {    e.preventDefault();
+            var inptvalue=document.getElementById("itemvalue").value;
+           
+            //create li element
+            var li=document.createElement('li');
+            
+            //textnode in li
+            li.appendChild(document.createTextNode(inptvalue));
+            //create delete button
+            var del=document.createElement('button');
+           
+            del.className="delete";
+           // del.appendChild(document.createTextNode('X'));
+            var delIcon=document.createElement('i')
+            delIcon.className="fa fa-trash";
+            del.appendChild(delIcon);
+            li.appendChild(del);
+           
+            itemlist.appendChild(li);
+            form.reset();
+        }
+        //Delete element funcation
+        function removeitem(e)
+        {
+            if(confirm("Are you sure"))
+               {   
+                var li=e.target.parentElement.parentElement;
+                console.log(li);
+                itemlist.removeChild(li);
+               }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>
